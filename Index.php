@@ -1,5 +1,4 @@
 <?php 
-/*Jest jakiś problem z $smarty = new Smarty(); ale nie wiem co*/
     session_start(); 
     require('Smarty/Smarty.class.php');
     $smarty = new Smarty();
@@ -8,7 +7,6 @@
     $smarty->setCompileDir('smarty/templates_c');
     $smarty->setCacheDir('smarty/cache');
     $smarty->setConfigDir('smarty/configs');
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
