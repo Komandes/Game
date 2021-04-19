@@ -19,5 +19,12 @@ class Piece
         return $html;
 
     }
-}
+}/*<?php
+    require('class/GameGuts.php');
+    $gm = new GameMenager();
+
+    echo $gm->getboardHTML();
+    
+?>*/
 ?>
+
