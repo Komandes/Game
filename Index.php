@@ -1,4 +1,5 @@
 <?php 
+    /*Smarty*/
     session_start(); 
     require('Smarty/Smarty.class.php');
     $smarty = new Smarty();
