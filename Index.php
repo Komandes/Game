@@ -1,5 +1,6 @@
 <?php 
     /*Smarty*/
+    require('class/GameGuts.php');
     session_start(); 
     require('Smarty/Smarty.class.php');
     $smarty = new Smarty();
@@ -14,12 +15,14 @@
         $db = new mysqli('localhost', 'root', '', 'chess');
         if ($db->errno) 
             throw new RuntimeException('mysqli error: ' . $db->errno);
-        
+        /* switch odpowiadający za logowanie, rejestrowanie i wylogowywanie*/
         switch($action){
+            /* wylogowywanie */
             case 'logout':
                 $smarty->assign('info', "wylogowano poprawnie");
                 $smarty->display('index.tpl');
                 break;
+                /* rejestrowanie */
             case 'register':
                 if (!isset($_REQUEST['email']) && !isset($_REQUEST['password']))
                 $smarty->display('register.tpl');
@@ -41,6 +44,7 @@
     $smarty->display('index.tpl');
 }
                 break;
+                        /* logowanie */
                 case 'login':
                     if (!isset($_REQUEST['email']) && !isset($_REQUEST['password']))
                     $smarty->display('login.tpl');
@@ -58,9 +62,7 @@
                             $smarty->assign('info',"Dobrze Zalogowano");
                             $_SESSION['user_ID'] = $userRow['ID'];
                             $_SESSION['user_email'] = $email;
-                            $smarty->assign('ID', $_SESSION['user_ID']);    
-    
-
+                            $smarty->assign('ID', $_SESSION['user_ID']);   
                     $smarty->assign('email', $_SESSION['user_email']);
                     $smarty->display('internal.tpl');
                     
@@ -75,13 +77,13 @@
             
         }
     }
-    else if(isset($_REQUEST['user_ID'])){/* log */
+    else if(isset($_REQUEST['user_ID'])){/* zalogowany */
         $smarty->assign('ID', $_SESSION['user_ID']);
         $smarty->assign('email', $_SESSION['user_email']);
         $smarty->display('internal.tpl');
     
     }
-    else{/* nie-log*/
+    else{/* nie zalogowany*/
         $smarty->display('index.tpl');
 
     }
