@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="Looks.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,900;1,500;1,700&display=swap" rel="stylesheet">
 </head>
 <body onload="prepareBoard()">
 <main>
@@ -39,16 +41,15 @@ echo $gm->getBoardHTML();
 <div class="panel">
     <header>
         <h1>Szachy</h1>
-        <p>Czas: 20min</p>
     </header>
 <div class="Tura-wrapper">
     <div class="tura">
-    <p>Tura grasza: Czarny</p>
+    <p id="Gracz">Tura gracza: Biały</p>
     </div>
 
 
 <div class="Timer">
-    <p>Czas: 90 sec</p>
+    <p>Pozostały czas: <span id="time">60</span></p>
 
 </div>
 </div>
@@ -86,7 +87,31 @@ echo $gm->getBoardHTML();
         });
         
     }
+    
+    function startTimer(duration, display) {
+    var timer = duration, seconds;
+    setInterval(function () {
+        seconds = parseInt(timer % 60, 10);
 
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = seconds;
+
+        var Gracz = document.getElementById('Gracz').value;
+        if (--timer < 0) {
+            timer = duration;
+            alert("Czas miną przegrałeś");
+        }
+        
+
+    }, 1000);
+}
+
+window.onload = function () {
+    var time = 60,
+        display = document.querySelector('#time');
+    startTimer(time, display);
+}
 </script>
 </body>
 </html>
